@@ -1,15 +1,19 @@
-correct_pin = "3550"
-attempts = 3
+def favorite_writer_quote():
+    writer_name = input("Enter the writer's name: ")
+    quote = input("Enter the quote: ")
 
-while attempts > 0:
-    user_pin = input("Enter PIN code: ")
-    
-    if user_pin == correct_pin:
-        print("Access granted!")
-        break
-    else:
-        attempts -= 1
-        if attempts > 0:
-            print(f"Incorrect PIN. Remaining attempts: {attempts}")
-        else:
-            print("Card blocked!")
+    with open("quotes.txt", "a", encoding = "utf-8") as file:
+        file.write(f"{writer_name}: {quote}\n")
+    print("Information saved successfully!")
+
+def read_quotes():
+    try:
+        with open("quotes.txt", "r", encoding = "utf-8") as file:
+            content = file.read()
+            print("\n--- Saved Quotes ---")
+            print(content)
+    except FileNotFoundError:
+        print("The file 'quotes.txt' does not exist. Please add a quote first.")
+
+favorite_writer_quote()
+read_quotes()
